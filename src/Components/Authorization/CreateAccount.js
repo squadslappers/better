@@ -1,16 +1,44 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 
 const CreateAccount = (props) => {
-  return(<div className='obligatory-div'>
+
+  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [age, setAge] = useState('');
+  const [state, setState] = useState('');
+  const [email, setEmail] = useState('');
+
+  console.log(props.history);
+
+  return (<div className='column'>
     <span>People need to know whom they're helping.</span>
-    <input placeholder = 'name'/>
-    <input placeholder = 'username'/>
-    <input placeholder = 'password'/>
-    <input placeholder = 'age (supposed to be a selector'/>
-    <input placeholder = 'state (supposed to be a selector)'/>
-    <input placeholder = 'email'/>
-    <Link to='introduction'>Create Account</Link>
+    <div className='column'>
+      <input placeholder='name' onChange={(e) => setName(e.target.value)} value={name} />
+      <div>{name}</div>
+      <input placeholder='username' onChange={(e) => setUsername(e.target.value)} value={username} />
+      <div>{username}</div>
+      <input placeholder='password' onChange={(e) => setPassword(e.target.value)} value={password} />
+      <div>{password}</div>
+      <input placeholder='age' onChange={(e) => setAge(e.target.value)} value={age} />
+      <div>{age}</div>
+      <input placeholder='state' onChange={(e) => setState(e.target.value)} value={state} />
+      <div>{state}</div>
+      <input placeholder='email' onChange={(e) => setEmail(e.target.value)} value={email} />
+      <div>{email}</div>
+      {/* <Link to='introduction'>Create Account</Link> */}
+      <button onClick={() => {
+        console.log('name:', name);
+        console.log('username:', username);
+        console.log('password:', password);
+        console.log('age:', age);
+        console.log('state:', state);
+        console.log('email:', email);
+        props.history.push('/introduction');
+      }}>Create Account</button>
+    </div>
   </div>)
 }
 export default CreateAccount;

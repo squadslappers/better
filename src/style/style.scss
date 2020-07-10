@@ -1,0 +1,22 @@
+.App{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+a{
+  color: white;
+  width: 400px;
+  text-align: center;
+  padding: 20px 0px;
+  margin: 10px;
+  background: gray;
+  text-decoration: none;
+  font-size: 25px;
+}
