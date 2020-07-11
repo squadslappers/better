@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 
@@ -11,7 +12,16 @@ const CreateAccount = (props) => {
   const [state, setState] = useState('');
   const [email, setEmail] = useState('');
 
-  console.log(props.history);
+  useEffect(()=>{
+    getCategory();
+  }, [])
+
+  const getCategory = () => {
+    console.log('running');
+    axios.get('/api/test')
+      .then((res)=>console.log('res:', res))
+      .catch(()=>console.log('fail'))
+  }
 
   return (<div className='column'>
     <span>People need to know whom they're helping.</span>
