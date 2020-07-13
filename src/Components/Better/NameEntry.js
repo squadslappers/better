@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
+import axios from 'axios';
 
 const NameEntry = (props) => {
 
@@ -18,6 +18,10 @@ const NameEntry = (props) => {
   const [p5FirstName, setP5FirstName] = useState('');
   const [p5LastName, setP5LastName] = useState('');
   const [p5Email, setP5Email] = useState('');
+
+  const submitNames = () => {
+    axios.post('/names', {})
+  }
 
   return(<div className='column'>
     <span>minimum of 3 people required</span>
