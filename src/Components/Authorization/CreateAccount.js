@@ -13,13 +13,13 @@ const CreateAccount = (props) => {
   const [state, setState] = useState('');
   const [email, setEmail] = useState('');
 
-  const [firstNameError, setFirstNameError] = useState(true);
-  const [lastNameError, setLastNameError] = useState(true);
-  const [usernameError, setUsernameError] = useState(true);
-  const [passwordError, setPasswordError] = useState(true);
-  const [ageError, setAgeError] = useState(true);
-  const [stateError, setStateError] = useState(true);
-  const [emailError, setEmailError] = useState(true);
+  const [firstNameError, setFirstNameError] = useState(false);
+  const [lastNameError, setLastNameError] = useState(false);
+  const [usernameError, setUsernameError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const [ageError, setAgeError] = useState(false);
+  const [stateError, setStateError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
 
   let firstNameErrorMessage, lastNameErrorMessage, usernameErrorMessage, passwordErrorMessage, ageErrorMessage, stateErrorMessage, emailErrorMessage;
 
@@ -32,41 +32,53 @@ const CreateAccount = (props) => {
   if (emailError) { emailErrorMessage = (<span style={{'color': 'red'}}>Please enter a valid email.</span>) };
 
   const checkForm = () => {
-    if (firstName.length === 0) {setFirstNameError(true)}
-    else {setFirstNameError(false)}
+    let proceed = true;
+    if (firstName.length === 0) {
+      setFirstNameError(true);
+      proceed = false;
+    } else {setFirstNameError(false)}
 
-    if (lastName.length === 0) {setLastNameError(true)}
-    else {setLastNameError(false)};
+    if (lastName.length === 0) {
+      setLastNameError(true);
+      proceed = false;
+    } else {setLastNameError(false)};
 
-    if (username.length === 0) {setUsernameError(true)}
-    else {setUsernameError(false)}
+    if (username.length === 0) {
+      setUsernameError(true);
+      proceed = false;
+    } else {setUsernameError(false)}
 
-    if (password.length === 0) {setPasswordError(true)}
-    else {setPasswordError(false)}
+    if (password.length === 0) {
+      setPasswordError(true);
+      proceed = false;
+    } else {setPasswordError(false)}
 
-    if (age.length === 0) {setAgeError(true)}
-    else {setAgeError(false)}
+    if (age.length === 0) {
+      setAgeError(true);
+      proceed = false;
+    } else {setAgeError(false)}
 
-    if (state.length === 0) {setStateError(true)}
-    else {setStateError(false)}
+    if (state.length === 0) {
+      setStateError(true);
+      proceed = false;
+    } else {setStateError(false)}
 
-    if (email.length === 0) {setEmailError(true)}
-    else {setEmailError(false)}
+    if (email.length === 0) {
+      setEmailError(true);
+      proceed = false;
+    } else {setEmailError(false)}
+
+    if (proceed) {
+      axiosCall();
+    }
   }
 
   const axiosCall = () => {
     axios.post('/user', {firstName, lastName, username, password, age, state, email})
-    .then(()=>props.history.push('/name-entry'))
+    .then((res)=>{
+      props.history.push('/name-entry');
+    })
     .catch(()=>console.log('failed'));
-  }
-
-  const submitForm = () => {
-    checkForm();
-    if (firstNameError || lastNameError || usernameError || passwordError ||ageError || stateError || emailError) {
-      console.log('errors :(');
-    } else {
-      console.log('no errors here!');
-    }
   }
 
   return (<div className='column'>
@@ -92,7 +104,7 @@ const CreateAccount = (props) => {
       {emailErrorMessage}
       <input placeholder='email' onChange={(e) => setEmail(e.target.value)} value={email} />
       <button onClick={() => {
-        submitForm()
+        checkForm()
       }}>Create Account</button>
     </div>
   </div>)
