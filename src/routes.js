@@ -11,6 +11,7 @@ import Introduction from './Components/Authorization/Introduction';
 import Legal from './Components/Legal';
 import NameEntry from './Components/Better/NameEntry';
 import Feedback from './Components/Better/Feedback';
+import Login from './Components/Landing/Login';
 
 export default (
   <Switch>
@@ -24,5 +25,6 @@ export default (
     <Route path = '/name-entry' component = {NameEntry}/>
     <Route path = '/feedback' component = {Feedback}/>
     <Route path = '/social-experiment' component = {SocialExperiment}/>
+    <Route path = '/login' component = {Login}/>
   </Switch>
 )

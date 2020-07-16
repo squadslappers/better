@@ -6,20 +6,46 @@ const NameEntry = (props) => {
   const [p1FirstName, setP1FirstName] = useState('');
   const [p1LastName, setP1LastName] = useState('');
   const [p1Email, setP1Email] = useState('');
+
   const [p2FirstName, setP2FirstName] = useState('');
   const [p2LastName, setP2LastName] = useState('');
   const [p2Email, setP2Email] = useState('');
+
   const [p3FirstName, setP3FirstName] = useState('');
   const [p3LastName, setP3LastName] = useState('');
   const [p3Email, setP3Email] = useState('');
+
   const [p4FirstName, setP4FirstName] = useState('');
   const [p4LastName, setP4LastName] = useState('');
   const [p4Email, setP4Email] = useState('');
+
   const [p5FirstName, setP5FirstName] = useState('');
   const [p5LastName, setP5LastName] = useState('');
   const [p5Email, setP5Email] = useState('');
 
+  const [notEnoughPeople, setNotEnoughPeople] = useState(false);
+
+  let notEnoughPeopleMessage;
+  if (notEnoughPeople) {
+    notEnoughPeopleMessage = (<span style={{'color': 'red'}}>Please enter at least 3 people</span>)
+  }
+
   const submitNames = () => {
+    let proceed = true;
+    if (
+      !p1FirstName || !p1LastName || !p1Email ||
+      !p2FirstName || !p2LastName || !p2Email ||
+      !p3FirstName || !p3LastName || !p3Email
+    ) {
+      proceed = false;
+      setNotEnoughPeople(true);
+    } else {
+      setNotEnoughPeople(false);
+      axiosCall();
+    }
+  }
+
+  const axiosCall = () => {
     axios.post('/names', {
       p1FirstName, p1LastName, p1Email,
       p2FirstName, p2LastName, p2Email,
@@ -33,6 +59,7 @@ const NameEntry = (props) => {
 
   return(<div className='column'>
     <span>minimum of 3 people required</span>
+    <span>{notEnoughPeopleMessage}</span>
     <div>
       <span>Person 1</span>
       <input placeholder='first name' value={p1FirstName} onChange={(e)=>setP1FirstName(e.target.value)}/>

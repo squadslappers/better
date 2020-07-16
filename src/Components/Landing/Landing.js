@@ -8,6 +8,7 @@ const Landing = () => {
       <Link to='/landing/improvement'>I'm here for my own personal improvement</Link>
       <Link to='/landing/school'>I'm here for a school assignment</Link>
       <Link to='/landing/curiosity'>I'm curious as to what this is</Link>
+      <Link to='/login'>Login</Link>
     </div>
   </div>)
 }
