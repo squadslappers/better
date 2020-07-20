@@ -23,11 +23,17 @@ const NameEntry = (props) => {
   const [p5LastName, setP5LastName] = useState('');
   const [p5Email, setP5Email] = useState('');
 
-  const [notEnoughPeople, setNotEnoughPeople] = useState(false);
+  const [message, setMessage] = useState('');
 
-  let notEnoughPeopleMessage;
+  const [notEnoughPeople, setNotEnoughPeople] = useState(false);
+  const [noMessage, setNoMessage] = useState(false);
+
+  let notEnoughPeopleMessage, noMessageMessage;
   if (notEnoughPeople) {
     notEnoughPeopleMessage = (<span style={{'color': 'red'}}>Please enter at least 3 people</span>)
+  }
+  if (noMessage) {
+    noMessageMessage = (<span style={{'color': 'red'}}>Enter a message you would like to send.</span>)
   }
 
   const submitNames = () => {
@@ -41,6 +47,16 @@ const NameEntry = (props) => {
       setNotEnoughPeople(true);
     } else {
       setNotEnoughPeople(false);
+    }
+
+    if ( !message ){
+      proceed = false;
+      setNoMessage(true);
+    } else {
+      setNoMessage(false);
+    }
+    
+    if (proceed) {
       axiosCall();
     }
   }
@@ -51,7 +67,8 @@ const NameEntry = (props) => {
       p2FirstName, p2LastName, p2Email,
       p3FirstName, p3LastName, p3Email,
       p4FirstName, p4LastName, p4Email,
-      p5FirstName, p5LastName, p5Email
+      p5FirstName, p5LastName, p5Email,
+      message
     })
       .then(res => console.log(res.data))
       .catch(()=>console.log('fail'))
@@ -92,7 +109,8 @@ const NameEntry = (props) => {
     </div>
 
     <span>option to use standard message or customized</span>
-    <input placeholder='This is the default message'></input>
+    {noMessageMessage}
+    <input placeholder='This is the default message' value={message} onChange={(e)=>setMessage(e.target.value)}></input>
     <button onClick={()=>submitNames()}>Submit Request</button>
   </div>)
 }
