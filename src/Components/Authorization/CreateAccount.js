@@ -20,8 +20,9 @@ const CreateAccount = (props) => {
   const [ageError, setAgeError] = useState(false);
   const [stateError, setStateError] = useState(false);
   const [emailError, setEmailError] = useState(false);
+  const [generalError, setGeneralError] = useState(false);
 
-  let firstNameErrorMessage, lastNameErrorMessage, usernameErrorMessage, passwordErrorMessage, ageErrorMessage, stateErrorMessage, emailErrorMessage;
+  let firstNameErrorMessage, lastNameErrorMessage, usernameErrorMessage, passwordErrorMessage, ageErrorMessage, stateErrorMessage, emailErrorMessage, generalErrorMessage;
 
   if (firstNameError) { firstNameErrorMessage = (<span style={{'color': 'red'}}>Please enter your first name.</span>) };
   if (lastNameError) { lastNameErrorMessage = (<span style={{'color': 'red'}}>Please enter your last name.</span>) };
@@ -30,6 +31,7 @@ const CreateAccount = (props) => {
   if (ageError) { ageErrorMessage = (<span style={{'color': 'red'}}>Please enter your age.</span>) };
   if (stateError) { stateErrorMessage = (<span style={{'color': 'red'}}>Please enter your state.</span>) };
   if (emailError) { emailErrorMessage = (<span style={{'color': 'red'}}>Please enter a valid email.</span>) };
+  if (generalError) { generalErrorMessage = (<span style={{'color': 'red'}}>Sorry, something went wrong. Please try again later.</span>)}
 
   const checkForm = () => {
     let proceed = true;
@@ -76,12 +78,18 @@ const CreateAccount = (props) => {
   const axiosCall = () => {
     axios.post('/user', {firstName, lastName, username, password, age, state, email})
     .then((res)=>{
-      props.history.push('/name-entry');
+      setGeneralError(false);
+      console.log('data:', res.data);
+      // props.history.push('/name-entry');
     })
-    .catch(()=>console.log('failed'));
+    .catch((err)=>{
+      setGeneralError(true);
+      console.log(err)
+    });
   }
 
   return (<div className='column'>
+    {generalErrorMessage}
     <span>People need to know whom they're helping.</span>
     <div className='column'>
       {firstNameErrorMessage}

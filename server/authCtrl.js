@@ -1,34 +1,29 @@
 const bcrypt = require('bcryptjs');
 
-const users = [
-  {
-    id: 0,
-    firstName: 'Jake',
-    lastName: 'Moreno',
-    username: 'squidslippers',
-    password: 'asdf',
-    age: 25,
-    state: 'UT',
-    email: 'jacob.w.moreno@gmail.com'
-  }
-]
+const users = [];
 
 let id = 1;
 
 module.exports = {
   register: async(req, res) => {
     const {firstName, lastName, username, password, age, state, email} = req.body;
+    const {session} = req;
 
-    console.log('firstName:', firstName);
-    console.log('lastName:', lastName);
-    console.log('username:', username);
-    console.log('password:', password);
-    console.log('age:', age);
-    console.log('state:', state);
-    console.log('email:', email);
+    let index = users.findIndex(user => user.email === email);
 
-    const salt = bcrypt.genSaltSync(10);
-    console.log('salt:', salt);
-    res.status(200).send("WIN: axios.post('/user') successful");
+    if (index === -1) {
+      const salt = bcrypt.genSaltSync(10);
+      const hash = bcrypt.hashSync(password, salt);
+      users.push({
+        firstName, lastName, username, hash, age, state, email
+      });
+      res.status(200).send(users);
+      console.log('session:', session);
+      session.user = {username, email}
+      console.log('session user:', session);
+    } else {
+      return res.status(400).send('A user with that email already exists. Please log in.')
+    }
+
   }
 }
