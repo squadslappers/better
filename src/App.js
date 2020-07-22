@@ -3,7 +3,7 @@ import routes from './routes';
 import './style/style.scss';
 import Header from './Components/Header';
 
-function App() {
+function App(props) {
   return (
     <div className="App">
       <Header/>

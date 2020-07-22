@@ -1,3 +1,5 @@
+nodemailer = require('nodemailer'),
+
 module.exports = {
   sendMessage: async(req, res) => {
     const {
@@ -38,7 +40,6 @@ module.exports = {
     //     console.log('Email sent: ' + info.response);
     //   }
     // });
-
 
     res.status(200).send("WIN: axios.post('/names')");
   }

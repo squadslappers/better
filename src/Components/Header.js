@@ -1,11 +1,12 @@
 import React from 'react';
 import axios from 'axios';
+import {withRouter} from 'react-router-dom'
 
 const Header = (props) => {
 
   const logout = () => {
     axios.post('/logout')
-      .then((res) => props.history.push('/'))
+      .then(() => props.history.push('/'))
       .catch(() => console.log('FAIL: logout'))
   }
 
@@ -14,4 +15,4 @@ const Header = (props) => {
     <button onClick={()=>logout()}>Log Out</button>
   </div>)
 }
-export default Header;
+export default withRouter(Header);

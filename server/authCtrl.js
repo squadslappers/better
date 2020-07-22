@@ -25,8 +25,9 @@ module.exports = {
     }
   },
   logout: async(req, res) => {
-    console.log('running');
+    console.log('before:', req.session);
     req.session.destroy();
+    console.log('after:', req.session);
     res.sendStatus(200);
   }
 }

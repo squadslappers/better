@@ -5,7 +5,6 @@ const express = require('express'),
       app = express(),
       authCtrl = require('./authCtrl'),
       betterCtrl = require('./betterCtrl'),
-      nodemailer = require('nodemailer'),
       session = require('express-session')
 
 app.use(express.json());
