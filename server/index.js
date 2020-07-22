@@ -17,36 +17,10 @@ app.use(session({
 }));
 
 // === === AUTH ENDPOINTS === ===
-app.post('/user', authCtrl.register);
+app.post('/register', authCtrl.register);
+app.post('/logout', authCtrl.logout);
 
 // === === BETTER ENDPOINTS === ===
 app.post('/names', betterCtrl.sendMessage)
 
 app.listen(SERVER_PORT, () => console.log(`running: ${SERVER_PORT}`));
-
-
-
-
-
-var transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: GOOGLE_EMAIL,
-    pass: GOOGLE_PASS
-  }
-});
-
-var mailOptions = {
-  from: 'jacob.w.moreno@gmail.com',
-  // to: 'thetetons@gmail.com',
-  subject: 'Sending Email using Node.js',
-  text: `If you're reading this, nodemailer works `
-};
-
-// transporter.sendMail(mailOptions, function(error, info){
-//   if (error) {
-//     console.log(error);
-//   } else {
-//     console.log('Email sent: ' + info.response);
-//   }
-// });
