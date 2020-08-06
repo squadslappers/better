@@ -1,4 +1,5 @@
 nodemailer = require('nodemailer'),
+{GOOGLE_PASS, GOOGLE_EMAIL} = process.env,
 
 module.exports = {
   sendMessage: async(req, res) => {
@@ -28,18 +29,18 @@ module.exports = {
 
     var mailOptions = {
       from: 'jacob.w.moreno@gmail.com',
-      // to: 'thetetons@gmail.com',
+      to: [p1Email, p2Email, p3Email, p4Email, p5Email],
       subject: 'Sending Email using Node.js',
-      text: `If you're reading this, nodemailer works `
+      text: `Hey! Your friend {Jake} sent you this message: ${message}`
     };
 
-    // transporter.sendMail(mailOptions, function(error, info){
-    //   if (error) {
-    //     console.log(error);
-    //   } else {
-    //     console.log('Email sent: ' + info.response);
-    //   }
-    // });
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
 
     res.status(200).send("WIN: axios.post('/names')");
   }
