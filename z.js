@@ -16,7 +16,7 @@ login: async(req, res) => {
       console.log('session user:', session.user)
       res.status(202).send(session.user)
   } else {
-      res.status(401).send('Incorrect password')
+      res.status(400).send('Incorrect password')
       console.log('you suck')
   }
 },

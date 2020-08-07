@@ -12,13 +12,6 @@ module.exports = {
       message
     } = req.body;
 
-    console.log('p1:', p1FirstName, p1LastName, p1Email)
-    console.log('p2:', p2FirstName, p2LastName, p2Email)
-    console.log('p3:', p3FirstName, p3LastName, p3Email)
-    console.log('p4:', p4FirstName, p4LastName, p4Email)
-    console.log('p5:', p5FirstName, p5LastName, p5Email)
-    console.log('message:', message)
-
     var transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -27,10 +20,20 @@ module.exports = {
       }
     });
 
+    if (p1Firstname && p1LastName && p1Email)
+    {
+      var mailOptions = {
+        from: 'Better Inc.',
+        to: p1Email,
+        subject: `${p1FirstName}, Jake Moreno wants your advice.`,
+        text: `Hey, ${p1FirstName}, your friend Jake Moreno used Better to send you the following message: ${message} You can reply to this email and they will receive it.`
+      }
+    }
+
     var mailOptions = {
       from: 'jacob.w.moreno@gmail.com',
       to: [p1Email, p2Email, p3Email, p4Email, p5Email],
-      subject: 'Sending Email using Node.js',
+      subject: 'Jake Wants Your Advice',
       text: `Hey! Your friend {Jake} sent you this message: ${message}`
     };
 

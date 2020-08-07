@@ -19,9 +19,9 @@ const CreateAccount = (props) => {
   const [ageError, setAgeError] = useState(false);
   const [stateError, setStateError] = useState(false);
   const [emailError, setEmailError] = useState(false);
-  const [generalError, setGeneralError] = useState(false);
+  const [generalError, setExistingEmail] = useState(false);
 
-  let firstNameErrorMessage, lastNameErrorMessage, passwordErrorMessage, passwordAgainErrorMessage, passCheckErrorMessage, ageErrorMessage, stateErrorMessage, emailErrorMessage, generalErrorMessage;
+  let firstNameErrorMessage, lastNameErrorMessage, passwordErrorMessage, passwordAgainErrorMessage, passCheckErrorMessage, ageErrorMessage, stateErrorMessage, emailErrorMessage, existingEmailMessage;
 
   if (firstNameError) { firstNameErrorMessage = (<span style={{'color': 'red'}}>Please enter your first name.</span>) };
   if (lastNameError) { lastNameErrorMessage = (<span style={{'color': 'red'}}>Please enter your last name.</span>) };
@@ -31,7 +31,7 @@ const CreateAccount = (props) => {
   if (ageError) { ageErrorMessage = (<span style={{'color': 'red'}}>Please enter your age.</span>) };
   if (stateError) { stateErrorMessage = (<span style={{'color': 'red'}}>Please enter your state.</span>) };
   if (emailError) { emailErrorMessage = (<span style={{'color': 'red'}}>Please enter a valid email.</span>) };
-  if (generalError) { generalErrorMessage = (<span style={{'color': 'red'}}>Sorry, something went wrong. Please try again later.</span>)};
+  if (generalError) { existingEmailMessage = (<span style={{'color': 'red'}}>A user with that email already exists. Please log in.</span>)};
 
   const checkForm = () => {
     let proceed = true;
@@ -83,18 +83,16 @@ const CreateAccount = (props) => {
   const axiosRegister = () => {
     axios.post('/register', {firstName, lastName, password, age, state, email})
     .then((res)=>{
-      setGeneralError(false);
+      setExistingEmail(false);
       console.log('data:', res.data);
       props.history.push('/name-entry');
     })
-    .catch((err)=>{
-      setGeneralError(true);
-      console.log(err)
+    .catch((err, req, res)=>{
+      setExistingEmail(true);
     });
   }
 
   return (<div className='column'>
-    {generalErrorMessage}
     <span>People need to know whom they're helping.</span>
     <div className='column'>
 
@@ -189,6 +187,7 @@ const CreateAccount = (props) => {
         <option value="WY">Wyoming</option>
       </select>
 
+      {existingEmailMessage}
       {emailErrorMessage}
       <input
         placeholder='email'

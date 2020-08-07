@@ -21,7 +21,9 @@ module.exports = {
       session.user = {firstName, lastName, email}
       console.log('session:', session);
     } else {
-      return res.status(400).send('A user with that email already exists. Please log in.')
+      res.statusMessage='A user with that email already exists';
+      res.status(400).send();
+      return res;
     }
   },
   logout: async(req, res) => {
