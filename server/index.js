@@ -8,6 +8,7 @@ const express = require('express'),
       session = require('express-session')
 
 app.use(express.json());
+
 app.use(session({
   resave: false,
   saveUninitialized: true,
@@ -20,6 +21,6 @@ app.post('/register', authCtrl.register);
 app.post('/logout', authCtrl.logout);
 
 // === === BETTER ENDPOINTS === ===
-app.post('/names', betterCtrl.sendMessage)
+app.post('/api/email', betterCtrl.sendMessage)
 
 app.listen(SERVER_PORT, () => console.log(`running: ${SERVER_PORT}`));

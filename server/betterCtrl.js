@@ -20,30 +20,30 @@ module.exports = {
       }
     });
 
-    if (p1Firstname && p1LastName && p1Email)
+    if (p1FirstName && p1LastName && p1Email)
     {
       var mailOptions = {
         from: 'Better Inc.',
-        to: p1Email,
+        to: [p1Email, p2Email, p3Email, p4Email, p5Email],
         subject: `${p1FirstName}, Jake Moreno wants your advice.`,
         text: `Hey, ${p1FirstName}, your friend Jake Moreno used Better to send you the following message: ${message} You can reply to this email and they will receive it.`
-      }
+      };
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
     }
 
-    var mailOptions = {
-      from: 'jacob.w.moreno@gmail.com',
-      to: [p1Email, p2Email, p3Email, p4Email, p5Email],
-      subject: 'Jake Wants Your Advice',
-      text: `Hey! Your friend {Jake} sent you this message: ${message}`
-    };
+    // var mailOptions = {
+    //   from: 'jacob.w.moreno@gmail.com',
+    //   to: [p1Email, p2Email, p3Email, p4Email, p5Email],
+    //   subject: 'Jake Wants Your Advice',
+    //   text: `Hey! Your friend {Jake} sent you this message: ${message}`
+    // };
 
-    transporter.sendMail(mailOptions, function(error, info){
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('Email sent: ' + info.response);
-      }
-    });
 
     res.status(200).send("WIN: axios.post('/names')");
   }

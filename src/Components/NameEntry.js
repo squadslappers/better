@@ -55,14 +55,14 @@ const NameEntry = (props) => {
     } else {
       setNoMessage(false);
     }
-    
+
     if (proceed) {
       axiosCall();
     }
   }
 
   const axiosCall = () => {
-    axios.post('/names', {
+    axios.post('/api/email', {
       p1FirstName, p1LastName, p1Email,
       p2FirstName, p2LastName, p2Email,
       p3FirstName, p3LastName, p3Email,
