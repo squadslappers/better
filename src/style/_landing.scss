@@ -1,14 +1,62 @@
-h1{
-  font-size: 1rem;
-  color: green;
-}
-a{
-  color: white;
-  width: 350px;
+.column{
+  @include column;
+  width: 100%;
+  justify-content: space-between;
   text-align: center;
-  padding: 20px 0px;
-  background: green;
-  text-decoration: none;
-  font-size: 1.2rem;
-  border-radius: 10px;
 }
+.landing__pic-box{
+  height: 275px; width: 275px;
+  background: $darkblue;
+  border-radius: 16px;
+  margin: 30px auto;
+  padding: 0 32px;
+  p{color: white;}
+  box-shadow: 0px 2px 8px black;
+}
+.landing__pic{
+  height: 200px;
+}
+.landing__vid{
+  margin: 32px 0;
+  padding: 32px;
+  height: 200px; width: 100%;
+  background: $darkblue; color: white;
+}
+.alice-carousel__prev-btn,
+.alice-carousel__next-btn,
+.alice-carousel__dots{
+  display: none;
+}
+.alice-carousel__dots{
+  // margin-top: 10px;
+}
+.landing__links{
+  @include column;
+  justify-content: space-between;
+  width: 100%;
+}
+.landing__snippet{
+  margin-bottom: 8px;
+  color: $gray;
+  font-weight: bold;
+}
+.landing__link{
+  color: white;
+  background: $darkred;
+  width: 100%;
+  padding: 16px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  font-weight: bold;
+  box-shadow: 0px 2px 5px black;
+}
+.landing__red-text{
+  color: $darkred;
+  font-weight: bold;
+  margin-top: 8px;
+}
+h1{
+  font-size: 1.8rem;
+  color: $darkblue
+}
+h3{color: #7f7f7f;}

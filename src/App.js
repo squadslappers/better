@@ -6,7 +6,7 @@ import Header from './Components/Header';
 function App(props) {
   return (
     <div className="App">
-      <Header/>
+      {/* <Header/> */}
       {routes}
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 const CreateAccount = (props) => {
 
@@ -23,15 +24,15 @@ const CreateAccount = (props) => {
 
   let firstNameErrorMessage, lastNameErrorMessage, passwordErrorMessage, passwordAgainErrorMessage, passCheckErrorMessage, ageErrorMessage, stateErrorMessage, emailErrorMessage, existingEmailMessage;
 
-  if (firstNameError) { firstNameErrorMessage = (<span style={{'color': 'red'}}>Please enter your first name.</span>) };
-  if (lastNameError) { lastNameErrorMessage = (<span style={{'color': 'red'}}>Please enter your last name.</span>) };
-  if (passwordError) { passwordErrorMessage = (<span style={{'color': 'red'}}>Please enter a password.</span>) };
-  if (passwordAgainError) { passwordAgainErrorMessage = (<span style={{'color': 'red'}}>Please enter your password again.</span>) };
-  if (passCheckError) { passCheckErrorMessage = (<span style={{'color': 'red'}}>Your passwords do not match. Please try again.</span>)};
-  if (ageError) { ageErrorMessage = (<span style={{'color': 'red'}}>Please enter your age.</span>) };
-  if (stateError) { stateErrorMessage = (<span style={{'color': 'red'}}>Please enter your state.</span>) };
-  if (emailError) { emailErrorMessage = (<span style={{'color': 'red'}}>Please enter a valid email.</span>) };
-  if (generalError) { existingEmailMessage = (<span style={{'color': 'red'}}>A user with that email already exists. Please log in.</span>)};
+  if (firstNameError) { firstNameErrorMessage = (<span className='landing__error'>Please enter your first name.</span>) };
+  if (lastNameError) { lastNameErrorMessage = (<span className='landing__error'>Please enter your last name.</span>) };
+  if (passwordError) { passwordErrorMessage = (<span className='landing__error'>Please enter a password.</span>) };
+  if (passwordAgainError) { passwordAgainErrorMessage = (<span className='landing__error'>Please enter your password again.</span>) };
+  if (passCheckError) { passCheckErrorMessage = (<span className='landing__error'>Your passwords do not match. Please try again.</span>)};
+  if (ageError) { ageErrorMessage = (<span className='landing__error'>Please enter your age.</span>) };
+  if (stateError) { stateErrorMessage = (<span className='landing__error'>Please enter your state.</span>) };
+  if (emailError) { emailErrorMessage = (<span className='landing__error'>Please enter a valid email.</span>) };
+  if (generalError) { existingEmailMessage = (<span className='landing__error'>A user with that email already exists. Please log in.</span>)};
 
   const checkForm = () => {
     let proceed = true;
@@ -60,15 +61,15 @@ const CreateAccount = (props) => {
       proceed = false;
     } else (setPassCheckError(false))
 
-    if (age.length === 0) {
-      setAgeError(true);
-      proceed = false;
-    } else {setAgeError(false)}
+    // if (age.length === 0) {
+    //   setAgeError(true);
+    //   proceed = false;
+    // } else {setAgeError(false)}
 
-    if (state.length === 0) {
-      setStateError(true);
-      proceed = false;
-    } else {setStateError(false)}
+    // if (state.length === 0) {
+    //   setStateError(true);
+    //   proceed = false;
+    // } else {setStateError(false)}
 
     if (email.length === 0) {
       setEmailError(true);
@@ -76,7 +77,11 @@ const CreateAccount = (props) => {
     } else {setEmailError(false)}
 
     if (proceed) {
-      axiosRegister();
+      // axiosRegister();
+      console.log('worked');
+      props.history.push('/name-entry');
+    } else {
+      console.log('fail');
     }
   }
 
@@ -93,43 +98,64 @@ const CreateAccount = (props) => {
   }
 
   return (<div className='column'>
-    <span>People need to know whom they're helping.</span>
-    <div className='column'>
-
+    <h1>Create an Account</h1>
+    <span>People need to know whom they're helping, and this is where we'll save all of your feedback for you.</span>
+    <div className='landing__form'>
       {firstNameErrorMessage}
       <input
         placeholder='first name'
-        onChange={(e) => {setFirstName(e.target.value)}}
+        className='landing__input'
+        onChange={(e) => {
+          setFirstName(e.target.value);
+          if (firstNameError) {setFirstNameError(false)};
+        }}
         value={firstName} />
-
       {lastNameErrorMessage}
       <input
         placeholder='last name'
-        onChange={(e) => setLastName(e.target.value)}
+        className='landing__input'
+        onChange={(e) => {
+          setLastName(e.target.value);
+          if (lastNameError) {setLastNameError(false)};
+        }}
         value={lastName} />
-
+      {existingEmailMessage}
+      {emailErrorMessage}
+      <input
+        placeholder='email'
+        className='landing__input'
+        onChange={(e) => {
+          setEmail(e.target.value);
+          if (emailError) {setEmailError(false)};
+        }}
+        value={email} />
       {passCheckErrorMessage}
       {passwordErrorMessage}
       <input
         placeholder='password'
-        onChange={(e) => setPassword(e.target.value)}
+        className='landing__input'
+        onChange={(e) => {
+          setPassword(e.target.value);
+          if (passwordError) {setPasswordError(false)};
+        }}
         value={password}
         type='password' />
-
       {passwordAgainErrorMessage}
       <input
         placeholder='repeat password'
-        onChange={(e) => setPasswordAgain(e.target.value)}
+        className='landing__input'
+        onChange={(e) => {
+          setPasswordAgain(e.target.value);
+          if (passwordAgainError) {setPasswordAgainError(false)};
+        }}
         value={passwordAgain}
         type='password' />
-
-      {ageErrorMessage}
+      {/* {ageErrorMessage}
       age<input
         type='month'
         max='2002-07'
         onChange={(e) => setAge(e.target.value)}
         value={age}/>
-
       {stateErrorMessage}
       state<select
         onChange={(e) => setState(e.target.value)}
@@ -185,16 +211,9 @@ const CreateAccount = (props) => {
         <option value="WV">West Virginia</option>
         <option value="WI">Wisconsin</option>
         <option value="WY">Wyoming</option>
-      </select>
-
-      {existingEmailMessage}
-      {emailErrorMessage}
-      <input
-        placeholder='email'
-        onChange={(e) => setEmail(e.target.value)}
-        value={email} />
-
-      <button onClick={() => { checkForm() }}>Create Account</button>
+      </select> */}
+      <button onClick={() => { checkForm() }} className='landing__link'>Create Account</button>
+      <Link to='/' className='landing__white-text'>Cancel</Link>
 
     </div>
   </div>)
