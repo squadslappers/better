@@ -1,0 +1,16 @@
+.message {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 2;
+}
+.message__inner{
+  position: fixed;
+  bottom: 0;
+  height: 90vh; width: 100vw;
+  border-top-right-radius: 16px;
+  border-top-left-radius: 16px;
+  background: white;
+}

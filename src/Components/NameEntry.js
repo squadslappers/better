@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import Message from './Message';
 
 const NameEntry = (props) => {
 
@@ -76,6 +77,7 @@ const NameEntry = (props) => {
   }
 
   return(<div className='column'>
+    <Message/>
     <h1>Time to Ask for Advice</h1>
     <span>{notEnoughPeopleMessage}</span>
     <div className='advice__required-box'>
