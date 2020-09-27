@@ -7,10 +7,16 @@
   z-index: 2;
 }
 .message__inner{
-  position: fixed;
-  bottom: 0;
+  position: fixed; bottom: 0;
   height: 90vh; width: 100vw;
-  border-top-right-radius: 16px;
-  border-top-left-radius: 16px;
+  border-top-right-radius: 16px; border-top-left-radius: 16px;
   background: white;
+  display: flex; flex-direction: column;
+  padding: 16px;
+}
+.message__input{
+  margin-top: 16px;
+  padding: 16px;
+  height: 300px;
+  border: 2px solid $gray; border-radius: 16px;
 }
