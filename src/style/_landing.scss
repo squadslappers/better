@@ -1,8 +1,7 @@
 .column{
   @include column;
-  width: 100%;
-  justify-content: space-between;
   text-align: center;
+  width: 100%;
 }
 .landing__pic-box{
   height: 275px; width: 275px;
@@ -27,13 +26,13 @@
 .alice-carousel__dots{
   display: none;
 }
-.alice-carousel__dots{
-  // margin-top: 10px;
-}
 .landing__links{
-  @include column;
+  position: fixed;
+  bottom: 30px;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  width: 100%;
+  width: 100%; max-width: 370px;
 }
 .landing__snippet{
   margin-bottom: 8px;

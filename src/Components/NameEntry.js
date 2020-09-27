@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 const NameEntry = (props) => {
 
@@ -30,7 +31,7 @@ const NameEntry = (props) => {
 
   let notEnoughPeopleMessage, noMessageMessage;
   if (notEnoughPeople) {
-    notEnoughPeopleMessage = (<span style={{'color': 'red'}}>Please enter at least 3 people</span>)
+    notEnoughPeopleMessage = (<span style={{'color': 'red'}}>* Minimum of 3 people required</span>)
   }
   if (noMessage) {
     noMessageMessage = (<span style={{'color': 'red'}}>Enter a message you would like to send.</span>)
@@ -75,43 +76,49 @@ const NameEntry = (props) => {
   }
 
   return(<div className='column'>
-    <span>minimum of 3 people required</span>
+    <h1>Time to Ask for Advice</h1>
     <span>{notEnoughPeopleMessage}</span>
-    <div>
+    <div className='advice__required-box'>
       <span>Person 1</span>
-      <input placeholder='first name' value={p1FirstName} onChange={(e)=>setP1FirstName(e.target.value)}/>
-      <input placeholder='last name' value={p1LastName} onChange={(e)=>setP1LastName(e.target.value)}/>
-      <input placeholder='email' value={p1Email} onChange={(e)=>setP1Email(e.target.value)}/>
-    </div>
-    <div>
+      <div className='advice__names'>
+        <input className='landing__input' placeholder='first name' value={p1FirstName} onChange={(e)=>setP1FirstName(e.target.value)}/>
+        <input className='landing__input' placeholder='last name' value={p1LastName} onChange={(e)=>setP1LastName(e.target.value)}/>
+      </div>
+      <input className='landing__input' placeholder='email' value={p1Email} onChange={(e)=>setP1Email(e.target.value)}/>
+
       <span>Person 2</span>
-      <input placeholder='first name' value={p2FirstName} onChange={(e)=>setP2FirstName(e.target.value)}/>
-      <input placeholder='last name' value={p2LastName} onChange={(e)=>setP2LastName(e.target.value)}/>
-      <input placeholder='email' value={p2Email} onChange={(e)=>setP2Email(e.target.value)}/>
-    </div>
-    <div>
+      <div className='advice__names'>
+        <input className='landing__input' placeholder='first name' value={p2FirstName} onChange={(e)=>setP2FirstName(e.target.value)}/>
+        <input className='landing__input' placeholder='last name' value={p2LastName} onChange={(e)=>setP2LastName(e.target.value)}/>
+      </div>
+      <input className='landing__input' placeholder='email' value={p2Email} onChange={(e)=>setP2Email(e.target.value)}/>
+
       <span>Person 3</span>
-      <input placeholder='first name' value={p3FirstName} onChange={(e)=>setP3FirstName(e.target.value)}/>
-      <input placeholder='last name' value={p3LastName} onChange={(e)=>setP3LastName(e.target.value)}/>
-      <input placeholder='email' value={p3Email} onChange={(e)=>setP3Email(e.target.value)}/>
-    </div>
-    <div>
+      <div className='advice__names'>
+        <input className='landing__input' placeholder='first name' value={p3FirstName} onChange={(e)=>setP3FirstName(e.target.value)}/>
+        <input className='landing__input' placeholder='last name' value={p3LastName} onChange={(e)=>setP3LastName(e.target.value)}/>
+      </div>
+      <input className='landing__input' placeholder='email' value={p3Email} onChange={(e)=>setP3Email(e.target.value)}/>
+
       <span>Person 4</span>
-      <input placeholder='first name' value={p4FirstName} onChange={(e)=>setP4FirstName(e.target.value)}/>
-      <input placeholder='last name' value={p4LastName} onChange={(e)=>setP4LastName(e.target.value)}/>
-      <input placeholder='email' value={p4Email} onChange={(e)=>setP4Email(e.target.value)}/>
-    </div>
-    <div>
+      <div className='advice__names'>
+        <input className='landing__input' placeholder='first name' value={p4FirstName} onChange={(e)=>setP4FirstName(e.target.value)}/>
+        <input className='landing__input' placeholder='last name' value={p4LastName} onChange={(e)=>setP4LastName(e.target.value)}/>
+      </div>
+      <input className='landing__input' placeholder='email' value={p4Email} onChange={(e)=>setP4Email(e.target.value)}/>
+
       <span>Person 5</span>
-      <input placeholder='first name' value={p5FirstName} onChange={(e)=>setP5FirstName(e.target.value)}/>
-      <input placeholder='last name' value={p5LastName} onChange={(e)=>setP5LastName(e.target.value)}/>
-      <input placeholder='email' value={p5Email} onChange={(e)=>setP5Email(e.target.value)}/>
+      <div className='advice__names'>
+        <input className='landing__input' placeholder='first name' value={p5FirstName} onChange={(e)=>setP5FirstName(e.target.value)}/>
+        <input className='landing__input' placeholder='last name' value={p5LastName} onChange={(e)=>setP5LastName(e.target.value)}/>
+      </div>
+      <input className='landing__input' placeholder='email' value={p5Email} onChange={(e)=>setP5Email(e.target.value)}/>
     </div>
 
-    <span>option to use standard message or customized</span>
-    {noMessageMessage}
-    <input placeholder='This is the default message' value={message} onChange={(e)=>setMessage(e.target.value)}></input>
-    <button onClick={()=>submitNames()}>Submit Request</button>
+    <div className='landing__links'>
+      <button className='landing__link'>Add a Message</button>
+      <Link to='/' className='landing__red-text'>Cancel</Link>
+    </div>
   </div>)
 }
 export default NameEntry;
